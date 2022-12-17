@@ -1,0 +1,456 @@
+
+SQL*Plus: Release 11.2.0.1.0 Production on Tue Dec 13 11:42:18 2022
+
+Copyright (c) 1982, 2010, Oracle.  All rights reserved.
+
+Enter user-name: scott
+Enter password:
+
+Connected to:
+Oracle Database 11g Enterprise Edition Release 11.2.0.1.0 - 64bit Production
+With the Partitioning, OLAP, Data Mining and Real Application Testing options
+
+SQL> set lines 120 pages 120
+SQL> select * from emp;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10
+
+14 rows selected.
+
+SQL> Select sal as Ammount from emp;
+
+   AMMOUNT
+----------
+       800
+      1600
+      1250
+      2975
+      1250
+      2850
+      2450
+      3000
+      5000
+      1500
+      1100
+       950
+      3000
+      1300
+
+14 rows selected.
+
+SQL> select comm Discount
+  2  from emp;
+
+  DISCOUNT
+----------
+
+       300
+       500
+
+      1400
+
+
+
+
+         0
+
+
+
+
+
+14 rows selected.
+
+SQL> select mgr Manager
+  2  from emp;
+
+   MANAGER
+----------
+      7902
+      7698
+      7698
+      7839
+      7698
+      7839
+      7839
+      7566
+
+      7698
+      7788
+      7698
+      7566
+      7782
+
+14 rows selected.
+
+SQL> Select emp.*,empno
+  2  from emp;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO      EMPNO
+---------- ---------- --------- ---------- --------- ---------- ---------- ---------- ----------
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20       7369
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30       7499
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30       7521
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20       7566
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30       7654
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30       7698
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10       7782
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20       7788
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10       7839
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30       7844
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20       7876
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30       7900
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20       7902
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10       7934
+
+14 rows selected.
+
+SQL> select ename,sal amount ,comm,mgr
+  2  from emp;
+
+ENAME          AMOUNT       COMM        MGR
+---------- ---------- ---------- ----------
+SMITH             800                  7902
+ALLEN            1600        300       7698
+WARD             1250        500       7698
+JONES            2975                  7839
+MARTIN           1250       1400       7698
+BLAKE            2850                  7839
+CLARK            2450                  7839
+SCOTT            3000                  7566
+KING             5000
+TURNER           1500          0       7698
+ADAMS            1100                  7788
+JAMES             950                  7698
+FORD             3000                  7566
+MILLER           1300                  7782
+
+14 rows selected.
+
+SQL> select sal from emp;
+
+       SAL
+----------
+       800
+      1600
+      1250
+      2975
+      1250
+      2850
+      2450
+      3000
+      5000
+      1500
+      1100
+       950
+      3000
+      1300
+
+14 rows selected.
+
+SQL> select sal
+  2  from emp
+  3  order by sal asc;
+
+       SAL
+----------
+       800
+       950
+      1100
+      1250
+      1250
+      1300
+      1500
+      1600
+      2450
+      2850
+      2975
+      3000
+      3000
+      5000
+
+14 rows selected.
+
+SQL> select deptno from emp
+  2  order by dept no desc;
+order by dept no desc
+              *
+ERROR at line 2:
+ORA-00933: SQL command not properly ended
+
+
+SQL> order by deptno desc;
+SP2-0734: unknown command beginning "order by d..." - rest of line ignored.
+SQL> select deptno
+  2  from emp
+  3  order by deptno desc;
+
+    DEPTNO
+----------
+        30
+        30
+        30
+        30
+        30
+        30
+        20
+        20
+        20
+        20
+        20
+        10
+        10
+        10
+
+14 rows selected.
+
+SQL> select mgr
+  2  from emp
+  3  order by mgr asc;
+
+       MGR
+----------
+      7566
+      7566
+      7698
+      7698
+      7698
+      7698
+      7698
+      7782
+      7788
+      7839
+      7839
+      7839
+      7902
+
+
+14 rows selected.
+
+SQL> select empno
+  2  from emp
+  3  order by empno desc;
+
+     EMPNO
+----------
+      7934
+      7902
+      7900
+      7876
+      7844
+      7839
+      7788
+      7782
+      7698
+      7654
+      7566
+      7521
+      7499
+      7369
+
+14 rows selected.
+
+SQL> select sal amount
+  2  from emp;
+
+    AMOUNT
+----------
+       800
+      1600
+      1250
+      2975
+      1250
+      2850
+      2450
+      3000
+      5000
+      1500
+      1100
+       950
+      3000
+      1300
+
+14 rows selected.
+
+SQL> select emp.*,mgr manager
+  2  from emp;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO    MANAGER
+---------- ---------- --------- ---------- --------- ---------- ---------- ---------- ----------
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20       7902
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30       7698
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30       7698
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20       7839
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30       7698
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30       7839
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10       7839
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20       7566
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30       7698
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20       7788
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30       7698
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20       7566
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10       7782
+
+14 rows selected.
+
+SQL> select empno
+  2  from empno
+  3  order by emp no;
+order by emp no
+             *
+ERROR at line 3:
+ORA-00933: SQL command not properly ended
+
+
+SQL> select empno
+  2  from empno
+  3  order by empno;
+from empno
+     *
+ERROR at line 2:
+ORA-00942: table or view does not exist
+
+
+SQL> select empno
+  2  from empno;
+from empno
+     *
+ERROR at line 2:
+ORA-00942: table or view does not exist
+
+
+SQL> select empno
+  2  from emp
+  3  order by empno asc;
+
+     EMPNO
+----------
+      7369
+      7499
+      7521
+      7566
+      7654
+      7698
+      7782
+      7788
+      7839
+      7844
+      7876
+      7900
+      7902
+      7934
+
+14 rows selected.
+
+SQL>  select empno
+  2    2  from emp
+  3    3  order by empno ;
+  2  from emp
+  *
+ERROR at line 2:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL>  select empno
+  2    2  from emp
+  3    3  order by empno;
+  2  from emp
+  *
+ERROR at line 2:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> select empno
+  2  from emp
+  3  order by empno desc;
+
+     EMPNO
+----------
+      7934
+      7902
+      7900
+      7876
+      7844
+      7839
+      7788
+      7782
+      7698
+      7654
+      7566
+      7521
+      7499
+      7369
+
+14 rows selected.
+
+SQL> select empno
+  2  from emp
+  3  order by empno asc;
+
+     EMPNO
+----------
+      7369
+      7499
+      7521
+      7566
+      7654
+      7698
+      7782
+      7788
+      7839
+      7844
+      7876
+      7900
+      7902
+      7934
+
+14 rows selected.
+
+SQL>  select empno
+  2    2  from emp
+  3    3  order by empno ;
+  2  from emp
+  *
+ERROR at line 2:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> select empno
+  2  from emp
+  3  order by empno;
+
+     EMPNO
+----------
+      7369
+      7499
+      7521
+      7566
+      7654
+      7698
+      7782
+      7788
+      7839
+      7844
+      7876
+      7900
+      7902
+      7934
+
+14 rows selected.
+
+SQL>

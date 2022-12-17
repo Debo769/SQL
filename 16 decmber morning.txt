@@ -1,0 +1,440 @@
+
+SQL*Plus: Release 11.2.0.1.0 Production on Fri Dec 16 08:41:17 2022
+
+Copyright (c) 1982, 2010, Oracle.  All rights reserved.
+
+Enter user-name: scott
+Enter password:
+
+Connected to:
+Oracle Database 11g Enterprise Edition Release 11.2.0.1.0 - 64bit Production
+With the Partitioning, OLAP, Data Mining and Real Application Testing options
+
+SQL> setlines 120 pages 120
+SP2-0734: unknown command beginning "setlines 1..." - rest of line ignored.
+SQL> set lines 120 pages 120
+SQL> select *
+  2  from tab;
+
+TNAME                          TABTYPE  CLUSTERID
+------------------------------ ------- ----------
+BONUS                          TABLE
+DEPT                           TABLE
+EMP                            TABLE
+SALGRADE                       TABLE
+
+SQL> select * from emp;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10
+
+14 rows selected.
+
+SQL> select * from salgrade;
+
+     GRADE      LOSAL      HISAL
+---------- ---------- ----------
+         1        700       1200
+         2       1201       1400
+         3       1401       2000
+         4       2001       3000
+         5       3001       9999
+
+SQL> select * from dept;
+
+    DEPTNO DNAME          LOC
+---------- -------------- -------------
+        10 ACCOUNTING     NEW YORK
+        20 RESEARCH       DALLAS
+        30 SALES          CHICAGO
+        40 OPERATIONS     BOSTON
+
+SQL>
+SQL> desc emp
+ Name                                                              Null?    Type
+ ----------------------------------------------------------------- -------- --------------------------------------------
+ EMPNO                                                             NOT NULL NUMBER(4)
+ ENAME                                                                      VARCHAR2(10)
+ JOB                                                                        VARCHAR2(9)
+ MGR                                                                        NUMBER(4)
+ HIREDATE                                                                   DATE
+ SAL                                                                        NUMBER(7,2)
+ COMM                                                                       NUMBER(7,2)
+ DEPTNO                                                                     NUMBER(2)
+
+SQL> desc salgrade
+ Name                                                              Null?    Type
+ ----------------------------------------------------------------- -------- --------------------------------------------
+ GRADE                                                                      NUMBER
+ LOSAL                                                                      NUMBER
+ HISAL                                                                      NUMBER
+
+SQL>
+SQL>
+SQL>
+SQL> spool c:/day1.txt
+SP2-0606: Cannot create SPOOL file "c:/day1.txt"
+SQL> create table Qspider(
+  2  Tname varchar (40);
+Tname varchar (40)
+                 *
+ERROR at line 2:
+ORA-00907: missing right parenthesis
+
+
+SQL> create table qspider(
+  2  Tname varchar (40),
+  3  Sub_name (40),
+  4  Place char (30));
+Sub_name (40),
+         *
+ERROR at line 3:
+ORA-00902: invalid datatype
+
+
+SQL> Sub_name varchar (40);
+SP2-0734: unknown command beginning "Sub_name v..." - rest of line ignored.
+SQL> craete table Qspider(
+SP2-0734: unknown command beginning "craete tab..." - rest of line ignored.
+SQL> create table qspider(
+  2    2  Tname varchar (40),
+  3    3  Sub_name (40),
+  4    4  Place char (30));
+  2  Tname varchar (40),
+  *
+ERROR at line 2:
+ORA-00904: : invalid identifier
+
+
+SQL> create table qspider(
+  2  Sub_name varchar (40);
+Sub_name varchar (40)
+                    *
+ERROR at line 2:
+ORA-00907: missing right parenthesis
+
+
+SQL> create table qspider(
+  2  Tname varchar (40),
+  3  Sub_name varchar (30);
+Sub_name varchar (30)
+                    *
+ERROR at line 3:
+ORA-00907: missing right parenthesis
+
+
+SQL> create table qspider(
+  2  Tname varchar (40),
+  3  sub_name varchar (30),
+  4  place char (30));
+
+Table created.
+
+SQL> desc qspider
+ Name                                                              Null?    Type
+ ----------------------------------------------------------------- -------- --------------------------------------------
+ TNAME                                                                      VARCHAR2(40)
+ SUB_NAME                                                                   VARCHAR2(30)
+ PLACE                                                                      CHAR(30)
+
+SQL> crate table qspider(
+SP2-0734: unknown command beginning "crate tabl..." - rest of line ignored.
+SQL> create table qspider(
+  2  rating char (10));
+create table qspider(
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object
+
+
+SQL> create table qspider(
+  2  rating nunber (10));
+rating nunber (10))
+              *
+ERROR at line 2:
+ORA-00907: missing right parenthesis
+
+
+SQL> create table qspider(
+  2  rating number(10));
+create table qspider(
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object
+
+
+SQL> desc qspider
+ Name                                                              Null?    Type
+ ----------------------------------------------------------------- -------- --------------------------------------------
+ TNAME                                                                      VARCHAR2(40)
+ SUB_NAME                                                                   VARCHAR2(30)
+ PLACE                                                                      CHAR(30)
+
+SQL> create table qspider(
+  2  rating number (2));
+create table qspider(
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object
+
+
+SQL> create table movie12(
+  2  mid number (6) primary key,
+  3  mname varchar (30) not null,
+  4  cost number (4) not null unique);
+
+Table created.
+
+SQL> create table theater12(
+  2  tid number (3) primary key,
+  3  tname char (50) not null,
+  4  mid number (60,
+  5  constcreate table qspider(
+  6    2  Tname varchar (40),
+  7    3  Sub_name (40),
+  8
+SQL> create table theater12(
+  2  tid number (3) primary key,
+  3  tname char (50) not null,
+  4  mid number (6),
+  5  Constraints mfk Foreign key(mid) Reference movie (mid));
+Constraints mfk Foreign key(mid) Reference movie (mid))
+                                 *
+ERROR at line 5:
+ORA-00905: missing keyword
+
+
+SQL>
+SQL> create table theater12(
+  2    2  tid number (3) primary key,
+  3    3  tname char (50) not null,
+  4    4  mid number (6),
+  5
+SQL>
+SQL> create table theater12(
+  2  tid number (3) primary key,
+  3  tname char (50) not null,
+  4  mid number (6),
+  5  constraint mfk foreign key
+  6   constraint mfk foreign key(mid) references movie12(mid));
+ constraint mfk foreign key(mid) references movie12(mid))
+ *
+ERROR at line 6:
+ORA-00906: missing left parenthesis
+
+
+SQL> create table theater12(
+  2    2  tid number (3) primary key,
+  3    3  tname char (50) not null,
+  4    4  mid number (6
+  5
+SQL>
+SQL> create table Flipkart(
+  2  oid number (6),
+  3  oname varchar (20),
+  4  d_b_name varchar (50),
+  5  O_date,
+  6  D-date);
+D-date)
+ *
+ERROR at line 6:
+ORA-00902: invalid datatype
+
+
+SQL> create table flipkart(
+  2  oid number (6) primary key,
+  3  o_nane varchar (40) not null,
+  4  D_Name varchar (40) not null,
+  5  price number (4),
+  6  d_date);
+d_date)
+*
+ERROR at line 6:
+ORA-02263: need to specify the datatype for this column
+
+
+SQL> create table flipkart(
+  2  oid number (6) primary key,
+  3  date date,
+  4  o_nane varchar (40) not null,
+  5  D_Name varchar (40) not null,
+  6  place varchar (30));
+date date,
+*
+ERROR at line 3:
+ORA-00904: : invalid identifier
+
+
+SQL> create table flipkart(
+  2  oid number (6) primary key,
+  3  d_date date,
+  4  D_Name varchar (40) not null,
+  5  o_nane varchar (40) not null,
+  6
+SQL>
+SQL> create table flipkart(
+  2  D_Name varchar(40) not null,
+  3  o_nane varchar(40) not null);
+
+Table created.
+
+SQL> alter table flipkart
+  2  add date date
+  3  ;
+add date date
+    *
+ERROR at line 2:
+ORA-00904: : invalid identifier
+
+
+SQL> alter table flipkart
+  2  add date datcreate table theater12(
+  3    2  tid number (3) primary key,
+  4    3  tname char (50) not null,
+  5    4  mid number (6
+  6
+SQL> alter table flipkart
+  2  add date;
+add date
+    *
+ERROR at line 2:
+ORA-00904: : invalid identifier
+
+
+SQL> alter table flipkart
+  2  add ddate date;
+
+Table altered.
+
+SQL> desc flipkart
+ Name                                                              Null?    Type
+ ----------------------------------------------------------------- -------- --------------------------------------------
+ D_NAME                                                            NOT NULL VARCHAR2(40)
+ O_NANE                                                            NOT NULL VARCHAR2(40)
+ DDATE                                                                      DATE
+
+SQL> alter table flipkart
+  2  add o_id number(3);
+
+Table altered.
+
+SQL> desc flipkart
+ Name                                                              Null?    Type
+ ----------------------------------------------------------------- -------- --------------------------------------------
+ D_NAME                                                            NOT NULL VARCHAR2(40)
+ O_NANE                                                            NOT NULL VARCHAR2(40)
+ DDATE                                                                      DATE
+ O_ID                                                                       NUMBER(3)
+
+SQL> alter tcreate table theater12(
+  2    2  tid number (3) primary key,
+  3    3  tname char (50) not null,
+  4
+SQL> alter table flipkart
+  2  add d_boy varchar (40);
+
+Table altered.
+
+SQL> desc flipkart
+ Name                                                              Null?    Type
+ ----------------------------------------------------------------- -------- --------------------------------------------
+ D_NAME                                                            NOT NULL VARCHAR2(40)
+ O_NANE                                                            NOT NULL VARCHAR2(40)
+ DDATE                                                                      DATE
+ O_ID                                                                       NUMBER(3)
+ D_BOY                                                                      VARCHAR2(40)
+
+SQL> alter table flipkart
+  2  drop D_BOY;
+drop D_BOY
+     *
+ERROR at line 2:
+ORA-00905: missing keyword
+
+
+SQL> alter table flipkart
+  2  drop column D_BOY;
+
+Table altered.
+
+SQL> desc flipkart
+ Name                                                              Null?    Type
+ ----------------------------------------------------------------- -------- --------------------------------------------
+ D_NAME                                                            NOT NULL VARCHAR2(40)
+ O_NANE                                                            NOT NULL VARCHAR2(40)
+ DDATE                                                                      DATE
+ O_ID                                                                       NUMBER(3)
+
+SQL> alter table flipkart
+  2  rename columncreate table theater12(
+  3    2  tid number (3) primary key,
+  4    3  tname char (50) not null,
+  5
+SQL> alter table flipkart
+  2  rename column D_NAME to Delivary-Name;
+alter table flipkart
+*
+ERROR at line 1:
+ORA-23290: This operation may not be combined with any other operation
+
+
+SQL> alter table flipkart
+  2  rename column D_NAME to Delivary-Name;
+alter table flipkart
+*
+ERROR at line 1:
+ORA-23290: This operation may not be combined with any other operation
+
+
+SQL> desc flipkart
+ Name                                                              Null?    Type
+ ----------------------------------------------------------------- -------- --------------------------------------------
+ D_NAME                                                            NOT NULL VARCHAR2(40)
+ O_NANE                                                            NOT NULL VARCHAR2(40)
+ DDATE                                                                      DATE
+ O_ID                                                                       NUMBER(3)
+
+SQL> alter table flipkart
+  2  rename column D_NAME to Delivary_Name;
+
+Table altered.
+
+SQL>
+SQL>
+SQL>
+SQL> create table theater12(
+  2    2  tid number (3) primary key,
+  3    3  tname char (50) not null,
+  4    4  mid number (6),
+  5    5  constraint mfk foreign key
+  6    6   constraint mfk foreign key(mid) references movie12(mid));
+  2  tid number (3) primary key,
+  *
+ERROR at line 2:
+ORA-00904: : invalid identifier
+
+
+SQL>
+SQL> create table theater12(
+  2  tid number(3) primary key,
+  3  mid number(6),
+  4  tname char(50) not null,
+  5  constraint mfk foreign key(mid) references movie12(mid));
+
+Table created.
+
+SQL>

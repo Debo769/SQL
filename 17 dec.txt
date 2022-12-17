@@ -1,0 +1,384 @@
+
+SQL*Plus: Release 11.2.0.1.0 Production on Sat Dec 17 08:15:10 2022
+
+Copyright (c) 1982, 2010, Oracle.  All rights reserved.
+
+Enter user-name: scott
+Enter password:
+ERROR:
+ORA-01017: invalid username/password; logon denied
+
+
+Enter user-name: scott
+Enter password:
+
+Connected to:
+Oracle Database 11g Enterprise Edition Release 11.2.0.1.0 - 64bit Production
+With the Partitioning, OLAP, Data Mining and Real Application Testing options
+
+SQL> set lines 120 pages 120
+SQL> desc theater1
+ERROR:
+ORA-04043: object theater1 does not exist
+
+
+SQL> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID
+------------------------------ ------- ----------
+BONUS                          TABLE
+DEPT                           TABLE
+EMP                            TABLE
+FLIPKART                       TABLE
+JSPIDER                        TABLE
+MOVIE12                        TABLE
+QSPIDER                        TABLE
+SALGRADE                       TABLE
+STUDENT                        TABLE
+THEATER12                      TABLE
+
+10 rows selected.
+
+SQL> desc theater12
+ Name                                                              Null?    Type
+ ----------------------------------------------------------------- -------- --------------------------------------------
+ TID                                                               NOT NULL NUMBER(3)
+ MID                                                                        NUMBER(6)
+ TNAME                                                             NOT NULL CHAR(50)
+
+SQL> desc movie12
+ Name                                                              Null?    Type
+ ----------------------------------------------------------------- -------- --------------------------------------------
+ MID                                                               NOT NULL NUMBER(6)
+ MNAME                                                             NOT NULL VARCHAR2(30)
+ COST                                                              NOT NULL NUMBER(4)
+
+SQL> desc student
+ Name                                                              Null?    Type
+ ----------------------------------------------------------------- -------- --------------------------------------------
+ SID                                                                        NUMBER(6)
+ RATING                                                                     NUMBER(2)
+ PHONE                                                                      NUMBER(11)
+
+SQL> desc jspider
+ Name                                                              Null?    Type
+ ----------------------------------------------------------------- -------- --------------------------------------------
+ SID                                                                        NUMBER(6)
+ SNAME                                                                      VARCHAR2(40)
+ SUB                                                                        VARCHAR2(30)
+ TRAINER                                                                    CHAR(40)
+ BRANCH                                                                     CHAR(30)
+
+SQL> desc dept
+ Name                                                              Null?    Type
+ ----------------------------------------------------------------- -------- --------------------------------------------
+ DEPTNO                                                            NOT NULL NUMBER(2)
+ DNAME                                                                      VARCHAR2(14)
+ LOC                                                                        VARCHAR2(13)
+
+SQL> desc emp
+ Name                                                              Null?    Type
+ ----------------------------------------------------------------- -------- --------------------------------------------
+ EMPNO                                                             NOT NULL NUMBER(4)
+ ENAME                                                                      VARCHAR2(10)
+ JOB                                                                        VARCHAR2(9)
+ MGR                                                                        NUMBER(4)
+ HIREDATE                                                                   DATE
+ SAL                                                                        NUMBER(7,2)
+ COMM                                                                       NUMBER(7,2)
+ DEPTNO                                                                     NUMBER(2)
+
+SQL> create table student(
+  2  constraint mfk foreign key(sname) references jspider(sname));
+create table student(
+                    *
+ERROR at line 1:
+ORA-00904: : invalid identifier
+
+
+SQL>   b
+SP2-0042: unknown command "b" - rest of line ignored.
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL>
+SQL> alter table student(
+  2  constraint mfk foreign key(sname) references jspider(sname));
+alter table student(
+                   *
+ERROR at line 1:
+ORA-01735: invalid ALTER TABLE option
+
+
+SQL>
+SQL>
+SQL>
+SQL> drop table qspider;
+
+Table dropped.
+
+SQL> desc qspider
+ERROR:
+ORA-04043: object qspider does not exist
+
+
+SQL>
+SQL>
+SQL>
+SQL> alter table student
+  2  constraint mfk foreign key(sname) references jspider(sname);
+constraint mfk foreign key(sname) references jspider(sname)
+*
+ERROR at line 2:
+ORA-01735: invalid ALTER TABLE option
+
+
+SQL> alter table student
+  2  constraint mfk foreign key(sname) references jspider(sname));
+constraint mfk foreign key(sname) references jspider(sname))
+*
+ERROR at line 2:
+ORA-01735: invalid ALTER TABLE option
+
+
+SQL>
+SQL>
+SQL>
+SQL> drop table flipkart;
+
+Table dropped.
+
+SQL> flashback table flipkart to before drop;
+
+Flashback complete.
+
+SQL> desc flashback
+ERROR:
+ORA-04043: object flashback does not exist
+
+
+SQL> desc flipkart
+ Name                                                              Null?    Type
+ ----------------------------------------------------------------- -------- --------------------------------------------
+ DELIVARY_NAME                                                     NOT NULL VARCHAR2(40)
+ O_NANE                                                            NOT NULL VARCHAR2(40)
+ DDATE                                                                      DATE
+ O_ID                                                                       NUMBER(3)
+
+SQL> purge table qspider;
+
+Table purged.
+
+SQL>
+SQL>
+SQL> flashback table qspider to before drop;
+flashback table qspider to before drop
+*
+ERROR at line 1:
+ORA-38305: object not in RECYCLE BIN
+
+
+SQL>
+SQL>
+SQL>
+SQL>
+SQL> create table neutral
+  2  as
+  3  select *
+  4  from emp;
+
+Table created.
+
+SQL>
+SQL>
+SQL> select * from emp;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10
+
+14 rows selected.
+
+SQL>
+SQL>
+SQL> truncate table neutral;
+
+Table truncated.
+
+SQL>
+SQL>
+SQL> select * from neutral;
+
+no rows selected
+
+SQL>
+SQL>
+SQL>
+SQL> desc neutral
+ Name                                                              Null?    Type
+ ----------------------------------------------------------------- -------- --------------------------------------------
+ EMPNO                                                                      NUMBER(4)
+ ENAME                                                                      VARCHAR2(10)
+ JOB                                                                        VARCHAR2(9)
+ MGR                                                                        NUMBER(4)
+ HIREDATE                                                                   DATE
+ SAL                                                                        NUMBER(7,2)
+ COMM                                                                       NUMBER(7,2)
+ DEPTNO                                                                     NUMBER(2)
+
+SQL>
+SQL>
+SQL> create table debojyoti
+  2  empro number(12));
+empro number(12))
+*
+ERROR at line 2:
+ORA-00922: missing or invalid option
+
+
+SQL> create table debojyoti(
+  2  empro number(12));
+
+Table created.
+
+SQL>
+SQL>
+SQL> alter table debojyoti
+  2  add ename (char)
+  3  add address char (70);
+add ename (char)
+          *
+ERROR at line 2:
+ORA-00902: invalid datatype
+
+
+SQL> alter table debojyoti
+  2  add ename char (40)
+  3  add address char (70);
+
+Table altered.
+
+SQL>
+SQL>
+SQL> rename debojyoti to gagari;
+
+Table renamed.
+
+SQL>
+SQL> desc debojyoti
+ERROR:
+ORA-04043: object debojyoti does not exist
+
+
+SQL>
+SQL> desc gagari
+ Name                                                              Null?    Type
+ ----------------------------------------------------------------- -------- --------------------------------------------
+ EMPRO                                                                      NUMBER(12)
+ ENAME                                                                      CHAR(40)
+ ADDRESS                                                                    CHAR(70)
+
+SQL>
+SQL>
+SQL> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID
+------------------------------ ------- ----------
+BONUS                          TABLE
+DEPT                           TABLE
+EMP                            TABLE
+FLIPKART                       TABLE
+GAGARI                         TABLE
+JSPIDER                        TABLE
+MOVIE12                        TABLE
+NEUTRAL                        TABLE
+SALGRADE                       TABLE
+STUDENT                        TABLE
+THEATER12                      TABLE
+
+11 rows selected.
+
+SQL>
+SQL>
+SQL> create table MCKV(
+  2  name varchar (30),
+  3  branch varchar (20),
+  4  sid number (4) primary key,
+  5  semester number (2),
+  6  passout number (4));
+
+Table created.
+
+SQL> alter table MCKV
+  2  drop semester;
+drop semester
+     *
+ERROR at line 2:
+ORA-00905: missing keyword
+
+
+SQL> alter table MCKV
+  2  drop column semester;
+
+Table altered.
+
+SQL> alter table MCKV
+  2  add res char (4);
+
+Table altered.
+
+SQL> desc MCKV
+ Name                                                              Null?    Type
+ ----------------------------------------------------------------- -------- --------------------------------------------
+ NAME                                                                       VARCHAR2(30)
+ BRANCH                                                                     VARCHAR2(20)
+ SID                                                               NOT NULL NUMBER(4)
+ PASSOUT                                                                    NUMBER(4)
+ RES                                                                        CHAR(4)
+
+SQL> alter table MCKV
+  2  rename column res to result;
+
+Table altered.
+
+SQL>
+SQL> desc MCKV
+ Name                                                              Null?    Type
+ ----------------------------------------------------------------- -------- --------------------------------------------
+ NAME                                                                       VARCHAR2(30)
+ BRANCH                                                                     VARCHAR2(20)
+ SID                                                               NOT NULL NUMBER(4)
+ PASSOUT                                                                    NUMBER(4)
+ RESULT                                                                     CHAR(4)
+
+SQL> create stdt(
+  2  address varchar(40),
+  3  room_no number(4),
+  4  sid
+  5
+SQL>
+SQL> create table stdt(
+  2  address varchar (30),
+  3  phn number(11) primary key,
+  4  room_no number(4),
+  5  sid number(4),
+  6  constraint stfk foreign key(sid) references MCKV(sid));
+
+Table created.
+
+SQL>
